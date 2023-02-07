@@ -1,9 +1,37 @@
-/*
- * DAD_FFT.h
+/* --COPYRIGHT--,BSD
+ * Copyright (c) 2015, Texas Instruments Incorporated
+ * All rights reserved.
  *
- *  Created on: Feb 5, 2023
- *      Author: Max
- */
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * --/COPYRIGHT--*/
+
+
+// Interrupts will have to be reset after running FFT
 
 #ifndef DAD_FFT_H_
 #define DAD_FFT_H_
@@ -23,18 +51,43 @@
 #define SAMPLE_FREQUENCY    8000
 
 
-// TODO configure with buffer ptr and size as input
+
+
+
+
+
+// Comment this out to run the application normally
+    // Debug mode runs the application as it would normally run in the default configuration
+    // Original code can be found under
+        // simplelink_msp432p4_sdk_3_40_01_02\examples\nortos\MSP_EXP432P401R\demos
+//#define DEBUG_MODE
+
+
+
+
+
+
+
+#ifndef DEBUG_MODE
+// Configure with buffer ptr and size as input
+void DAD_FFT_Config(void);
+
+// Run FFT on inData, spits it out into outData
+    // Parameters: inData - array of input data passed by reference. To be fourier transformed.
+    // Parameters: outData - array of FFT output
+void DAD_FFT_Run(uint16_t inData[SAMPLE_LENGTH], uint16_t outData[SAMPLE_LENGTH]);
+
+
+#else   // DEBUG_MODE defined
+// Configures FFT with Mic input and graphics output
 void DAD_FFT_Config();
 
-// Configures FFT with Mic input and graphics output
-void DAD_FFT_TestConfig();
-
-// TODO figure out where data is going
-// TODO start FFT
+// Runs FFT with mic input and graphics output
 void DAD_FFT_Run();
+#endif
 
-// TODO stop data calcs
 // TODO release all relevant resources
+// TODO stop interrupts
 void DAD_FFT_Stop();
 
 #endif /* DAD_FFT_H_ */

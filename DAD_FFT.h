@@ -48,11 +48,7 @@
 #define SAMPLE_LENGTH 512
 
 #define SMCLK_FREQUENCY     48000000
-#define SAMPLE_FREQUENCY    8000
-
-
-
-
+#define SAMPLE_FREQUENCY    10000
 
 
 
@@ -60,14 +56,10 @@
     // Debug mode runs the application as it would normally run in the default configuration
     // Original code can be found under
         // simplelink_msp432p4_sdk_3_40_01_02\examples\nortos\MSP_EXP432P401R\demos
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 
-
-
-
-
-
+// Normal operation
 #ifndef DEBUG_MODE
 // Configure with buffer ptr and size as input
 void DAD_FFT_Config(void);
@@ -75,16 +67,20 @@ void DAD_FFT_Config(void);
 // Run FFT on inData, spits it out into outData
     // Parameters: inData - array of input data passed by reference. To be fourier transformed.
     // Parameters: outData - array of FFT output
-void DAD_FFT_Run(uint16_t inData[SAMPLE_LENGTH], uint16_t outData[SAMPLE_LENGTH]);
+void DAD_FFT_Run(int16_t inData[SAMPLE_LENGTH], int16_t outData[SAMPLE_LENGTH]);
+#endif
 
 
-#else   // DEBUG_MODE defined
+
+// DEBUG_MODE defined
+#ifdef DEBUG_MODE
 // Configures FFT with Mic input and graphics output
 void DAD_FFT_Config();
-
 // Runs FFT with mic input and graphics output
 void DAD_FFT_Run();
 #endif
+
+
 
 // TODO release all relevant resources
 // TODO stop interrupts

@@ -12,15 +12,14 @@ int main(void){
 
 #ifdef DEBUG_MODE
     // TODO test FFT
-    DAD_FFT_Config_Debug();
+    DAD_FFT_Config();
     while(true){
-        DAD_FFT_Run_Debug();
+        DAD_FFT_Run();
     }
 #else
     // TODO test FFT
-    // TODO create dummy data
-    uint16_t inData[SAMPLE_LENGTH];
-    uint16_t outData[SAMPLE_LENGTH];
+    int16_t inData[SAMPLE_LENGTH];  // TODO fill with dummy data
+    int16_t outData[SAMPLE_LENGTH];
 
     DAD_FFT_Config();
     while(true){

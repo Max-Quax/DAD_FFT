@@ -116,7 +116,7 @@ void DAD_FFT_Config(){
     MAP_Interrupt_enableMaster();
 }
 
-void DAD_FFT_Run(uint16_t inData[SAMPLE_LENGTH], uint16_t outData[SAMPLE_LENGTH]){
+void DAD_FFT_Run(int16_t inData[SAMPLE_LENGTH], int16_t outData[SAMPLE_LENGTH]){
     int i = 0;
 
     /* Computer real FFT using the completed data buffer */

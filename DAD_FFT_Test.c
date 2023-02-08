@@ -7,6 +7,7 @@
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <DAD_FFT.h>
+#include <DAD_Timer.h>
 
 int main(void){
 
@@ -34,11 +35,20 @@ int main(void){
     }
 
 
+    // Configure timer
+    Timer_A_UpModeConfig config;
+    DAD_Timer_Initialize_ms(1000, TIMER_A3_BASE, &config);
+    DAD_Timer_Start(TIMER_A3_BASE);
+
     // Test FFT on random numbers
     DAD_FFT_Config();
-    while(true){
-        // Run FFT on numbers
-        DAD_FFT_Run(inData, outData);
-    }
+    // Run FFT on numbers
+    DAD_FFT_Run(inData, outData);
+    DAD_FFT_Stop();
+
+    double time_ms = DAD_Timer_Stop(TIMER_A3_BASE, &config);
+
+    while(1);   // Trap CPU
+
 #endif
 }

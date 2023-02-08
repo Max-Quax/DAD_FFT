@@ -96,11 +96,11 @@ void DAD_FFT_Config(){
     MAP_FlashCtl_setWaitState(FLASH_BANK1, 2);
 
     /* Initializes Clock System */
-    CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);
+    MAP_CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);
     MAP_CS_initClockSignal(CS_MCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_1);
     MAP_CS_initClockSignal(CS_HSMCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_1);
     MAP_CS_initClockSignal(CS_SMCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_1);
-    CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
+    MAP_CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_1);
 
     // Initialize Hann Window
     int n;
@@ -111,7 +111,7 @@ void DAD_FFT_Config(){
 
     /* Configuring Timer_A to have a period of approximately 500ms and
      * an initial duty cycle of 10% of that (3200 ticks)  */
-    Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
+    MAP_Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
 
     MAP_Interrupt_enableMaster();
 }
@@ -139,8 +139,6 @@ void DAD_FFT_Run(int16_t inData[SAMPLE_LENGTH], int16_t outData[SAMPLE_LENGTH]){
                             (data_input[i + 1] * data_input[i + 1])));
     }
 }
-
-
 #endif
 
 

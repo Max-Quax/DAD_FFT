@@ -18,7 +18,7 @@ int main(void){
     }
 #else
     // TODO test FFT
-    int16_t inData[SAMPLE_LENGTH];  // TODO fill with dummy data
+    int16_t inData[SAMPLE_LENGTH];
     int16_t outData[SAMPLE_LENGTH];
 
     // Fill inData with SAMPLE_FREQUENCY/10 Hz square wave

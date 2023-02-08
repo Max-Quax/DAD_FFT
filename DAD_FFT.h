@@ -56,7 +56,7 @@
     // Debug mode runs the application as it would normally run in the default configuration
     // Original code can be found under
         // simplelink_msp432p4_sdk_3_40_01_02\examples\nortos\MSP_EXP432P401R\demos
-#define DEBUG_MODE
+//#define DEBUG_MODE
 
 
 // Normal operation
